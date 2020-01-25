@@ -1,5 +1,5 @@
 <div class="row">
-  <div col-sm-4>
+  <div col-sm-6>
     <table class="table">
       <thead class="thead thead-dark">
         <tr>
@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let com of companyarray">
-          <td scope="row" (click)="popBranch(com)" >{{ com.name }}</td>
+          <td scope="row" (click)="popBranch(com)">{{ com.name }}</td>
           <td>
             <input
               name=""
@@ -35,60 +35,105 @@
       </tbody>
     </table>
     <form class="form-inline my-2 my-lg-0" [hidden]="editcom">
-        <input class="form-control mr-sm-2" type="text" [(ngModel)]="newcom" placeholder="New Company" name="newcom">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="addComp(newcom)">Add</button>
-      </form>
-      <form class="form-inline my-2 my-lg-0" [hidden]="!editcom">
-        <input class="form-control mr-sm-2" type="text" [(ngModel)]="curcomp" placeholder="Company" name="newcom">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="updateComp(curcomp)">Update</button>
-      </form>
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        [(ngModel)]="newcom"
+        placeholder="New Company"
+        name="newcom"
+      />
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+        (click)="addComp(newcom)"
+      >
+        Add
+      </button>
+    </form>
+    <form class="form-inline my-2 my-lg-0" [hidden]="!editcom">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        [(ngModel)]="curcomp"
+        placeholder="Company"
+        name="newcom"
+      />
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+        (click)="updateComp(curcomp)"
+      >
+        Update
+      </button>
+    </form>
   </div>
 
-<div class="col-sm-4" *ngIf="brashow">
-<table class="table table-striped table-inverse table-responsive">
-    <thead class="thead-inverse thead-dark">
+  <div class="col-sm-6" *ngIf="brashow">
+    <table class="table table-striped table-inverse table-responsive">
+      <thead class="thead-inverse thead-dark">
         <tr>
-            <th> {{curcompObj.name}} Branches</th>
-            <th>Edit</th>
-            <th>Delete</th>
+          <th>{{ curcompObj.name }} Branches</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let branch of brancharray">
-                <td scope="row" > {{branch}}</td>
-                <td>
-                    <input
-                    name=""
-                    id=""
-                    class="btn btn-primary"
-                    type="button"
-                    value="Edit"
-                    (click)="editBra(branch)"
-                  />
-                </td>
-                <td>
-                    <input
-                    name=""
-                    id=""
-                    class="btn btn-primary"
-                    type="button"
-                    value="Delete"
-                    (click)="deleteBra(branch)"
-                  />
-                </td>
-            </tr>
-        </tbody>
-</table>
-<form class="form-inline my-2 my-lg-0" [hidden]="editbra">
-    <input class="form-control mr-sm-2" type="text" [(ngModel)]="newbra" placeholder="New Company" name="newcom">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="addBra(newbra)">Add</button>
-  </form>
-  <form class="form-inline my-2 my-lg-0" [hidden]="!editbra">
-    <input class="form-control mr-sm-2" type="text" [(ngModel)]="curbra" placeholder="Company" name="newcom">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="updateBra(curbra)">Update</button>
-  </form>
-</div>
-
-
-
+      </thead>
+      <tbody>
+        <tr *ngFor="let branch of brancharray">
+          <td scope="row">{{ branch }}</td>
+          <td>
+            <input
+              name=""
+              id=""
+              class="btn btn-primary"
+              type="button"
+              value="Edit"
+              (click)="editBra(branch)"
+            />
+          </td>
+          <td>
+            <input
+              name=""
+              id=""
+              class="btn btn-primary"
+              type="button"
+              value="Delete"
+              (click)="deleteBra(branch)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <form class="form-inline my-2 my-lg-0" [hidden]="editbra">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        [(ngModel)]="newbra"
+        placeholder="New Company"
+        name="newcom"
+      />
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+        (click)="addBra(newbra)"
+      >
+        Add
+      </button>
+    </form>
+    <form class="form-inline my-2 my-lg-0" [hidden]="!editbra">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        [(ngModel)]="curbra"
+        placeholder="Company"
+        name="newcom"
+      />
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+        (click)="updateBra(curbra)"
+      >
+        Update
+      </button>
+    </form>
+  </div>
 </div>
