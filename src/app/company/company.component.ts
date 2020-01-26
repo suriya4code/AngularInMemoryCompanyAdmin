@@ -6,14 +6,18 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./company.component.css"]
 })
 export class CompanyComponent implements OnInit {
+  [x: string]: any;
   newcom;
   editcom = false;
   newbra;
+  showCusMaster = true;
   curcomp = "";
   curbra;
   curbrapast;
   cusfield;
   curcompObj;
+  curcusval;
+  curcusupdate;
   brashow = false;
   editbra = false;
   brancharray = [];
@@ -22,7 +26,7 @@ export class CompanyComponent implements OnInit {
     { name: "Honda", branches: ["chennai", "mumbai"] },
     { name: "Hyundai", branches: ["delhi", "Madurai"] }
   ];
-
+  editcus = false;
   cuskeyarray = [];
   newcusvaladd: string;
 
@@ -31,7 +35,7 @@ export class CompanyComponent implements OnInit {
   ngOnInit() {}
 
   addComp(comp) {
-    var ncom = { name: comp, branches: [],CustomObj:[]  };
+    var ncom = { name: comp, branches: [], CustomObj: [] };
     this.companyarray.push(ncom);
     this.newcom = "";
   }
@@ -115,7 +119,9 @@ export class CompanyComponent implements OnInit {
       this.companyarray[i]["CustomObj"] = obj;
     }
     this.getObjKeys();
-    this.cusfield = '';
+    this.cusfield = "";
+    this.showCusMaster = false;
+
     //this.getObjKeysfromObj(this.companyarray[0]);
     this.ngOnInit();
   }
@@ -144,7 +150,7 @@ export class CompanyComponent implements OnInit {
         }
       }
     }
-    this.newcusvaladd = '';
+    this.newcusvaladd = "";
   }
   getvalues(cuskey) {
     for (var i = 0; i < this.companyarray.length; i++) {
@@ -152,6 +158,50 @@ export class CompanyComponent implements OnInit {
         for (var j = 0; j < this.companyarray[i]["CustomObj"].length; j++) {
           if (this.companyarray[i]["CustomObj"][j].key == cuskey) {
             return this.companyarray[i]["CustomObj"][j].values;
+          }
+        }
+      }
+    }
+  }
+  delCusVal(cuskey, keyval) {
+    for (var i = 0; i < this.companyarray.length; i++) {
+      if (this.companyarray[i].name == this.curcompObj.name) {
+        for (var j = 0; j < this.companyarray[i]["CustomObj"].length; j++) {
+          if (this.companyarray[i]["CustomObj"][j].key == cuskey) {
+            for (let k = 0;k < this.companyarray[i]["CustomObj"][j].values.length;k++) {
+              if (this.companyarray[i]["CustomObj"][j].values[k] == keyval) {
+                this.companyarray[i]["CustomObj"][j].values.splice(k, 1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  editCusVal(val) {
+    this.editcus = true;
+    this.curcusval = val;
+    this.curcusupdate = val;
+  }
+  updateCusVal(curcusvalue, cuskey) {
+    for (var i = 0; i < this.companyarray.length; i++) {
+      if (this.companyarray[i].name == this.curcompObj.name) {
+        for (var j = 0; j < this.companyarray[i]["CustomObj"].length; j++) {
+          if (this.companyarray[i]["CustomObj"][j].key == cuskey) {
+            for (
+              let k = 0;
+              k < this.companyarray[i]["CustomObj"][j].values.length;
+              k++
+            ) {
+              if (
+                this.companyarray[i]["CustomObj"][j].values[k] ==
+                this.curcusupdate
+              ) {
+                this.companyarray[i]["CustomObj"][j].values[k] = curcusvalue;
+                this.editcus = false;
+                this.curcusval = "";
+              }
+            }
           }
         }
       }

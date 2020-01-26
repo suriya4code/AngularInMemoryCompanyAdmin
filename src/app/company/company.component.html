@@ -71,7 +71,7 @@
   <div class="col-sm-4" *ngIf="brashow">
     <table class="table table-striped table-inverse table-responsive">
       <thead class="thead-inverse thead-dark">
-        <tr>  
+        <tr>
           <th>{{ curcompObj.name }} Branches</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -137,95 +137,89 @@
     </form>
   </div>
   <div class="col-sm-4">
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" [hidden]="!showCusMaster">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        [(ngModel)]="cusfield"
+        placeholder="New Custom Field"
+        name="cusfield"
+      />
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+        (click)="updateMaster(cusfield)"
+      >
+        Add
+      </button>
+    </form>
+    <div class="col-sm-4" *ngFor="let cuskey of cuskeyarray">
+      <table class="table">
+        <thead class="thead thead-dark">
+          <tr>
+            <th>{{ cuskey }}</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let keyval of getvalues(cuskey)">
+            <td>{{ keyval }}</td>
+            <td>
+              <input
+                name=""
+                id=""
+                class="btn btn-primary"
+                type="button"
+                value="Edit"
+                (click)="editCusVal(keyval)"
+              />
+            </td>
+            <td>
+              <input
+                name=""
+                id=""
+                class="btn btn-primary"
+                type="button"
+                value="Delete"
+                (click)="delCusVal(cuskey, keyval)"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <form class="form-inline my-2 my-lg-0" [hidden]="editcus">
         <input
           class="form-control mr-sm-2"
           type="text"
-          [(ngModel)]="cusfield"
-          placeholder="New Custom Field"
-          name="cusfield"
+          [(ngModel)]="newcusvaladd"
+          placeholder="New {{ keyval }}"
+          name="newcom"
         />
         <button
           class="btn btn-outline-success my-2 my-sm-0"
           type="submit"
-          (click)="updateMaster(cusfield)"
+          (click)="addCusVal(newcusvaladd, cuskey)"
         >
-          Add 
+          Add
         </button>
       </form>
-  </div>
-
-<div class="row" *ngIf="brashow">
-    <div class="col-sm-4" *ngFor="let cuskey of cuskeyarray">
-        <table class="table" >
-            <thead class="thead thead-dark">
-                <tr>
-                    <th>{{cuskey}}</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let keyval of getvalues(cuskey)">
-                    <td>{{keyval}}</td>
-                    <td>
-                      <input
-                        name=""
-                        id=""
-                        class="btn btn-primary"
-                        type="button"
-                        value="Edit"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        name=""
-                        id=""
-                        class="btn btn-primary"
-                        type="button"
-                        value="Delete"
-                      />
-                    </td>
-
-                </tr>
-               
-            </tbody>
-        </table>
-        <form class="form-inline my-2 my-lg-0" [hidden]="editbra">
-          <input
-            class="form-control mr-sm-2"
-            type="text"
-            [(ngModel)]="newcusvaladd"
-            placeholder="New Company"
-            name="newcom"
-          />
-          <button
-            class="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-            (click)="addCusVal(newcusvaladd,cuskey)"
-          >
-            Add
-          </button>
-        </form>
-        <form class="form-inline my-2 my-lg-0" [hidden]="!editbra">
-          <input
-            class="form-control mr-sm-2"
-            type="text"
-            [(ngModel)]="curbra"
-            placeholder="Company"
-            name="newcom"
-          />
-          <button
-            class="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-            (click)="updateBra(curbra)"
-          >
-            Update
-          </button>
-        </form>
+      <form class="form-inline my-2 my-lg-0" [hidden]="!editcus">
+        <input
+          class="form-control mr-sm-2"
+          type="text"
+          [(ngModel)]="curcusval"
+          placeholder="Company"
+          name="newcom"
+        />
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          type="submit"
+          (click)="updateCusVal(curcusval, cuskey)"
+        >
+          Update
+        </button>
+      </form>
     </div>
-
-
-</div>
-
+  </div>
 </div>
